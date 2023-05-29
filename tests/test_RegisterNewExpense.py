@@ -1,4 +1,6 @@
-import __main__ as main
+
+import modules.movementManagers.expenseManager as expenseManager
 
 def test_ReturnsHello():
-    assert main.runProgram() == 'hello'
+    expMan = expenseManager.ExpenseManager()
+    assert expMan.test_func() == 1

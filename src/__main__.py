@@ -1,6 +1,5 @@
 
-def runProgram():
-    if __name__ == '__main__':
-        return 'hello'
+
+if __name__ == '__main__':
+    print('hello')
         
-runProgram()
