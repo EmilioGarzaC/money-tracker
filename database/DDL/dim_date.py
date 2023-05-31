@@ -38,51 +38,51 @@ class dimDate:
                 CalendarDateInterval,
                 datetime(CalendarDateInterval, '+86399 second') CalendarDateIntervalEnd,
                 strftime('%w',CalendarDateInterval)	DayNumber,
-                case cast (strftime('%w', CalendarDateInterval) as integer)
-                    when 0 then 'Sunday'
-                    when 1 then 'Monday'
-                    when 2 then 'Tuesday'
-                    when 3 then 'Wednesday'
-                    when 4 then 'Thursday'
-                    when 5 then 'Friday'
-                    when 6 then 'Saturday' end DayOfWeek,
-                    substr('SunMonTueWedThuFriSat', 1 + 3*strftime('%w', CalendarDateInterval), 3) DayOfWeekAbbr,
-                    strftime('%d',CalendarDateInterval)	DayOfMonth,
-                    case cast (strftime('%w', CalendarDateInterval) as integer)
-                    when 0 then 1
-                    when 6 then 1
-                    else 0 end IsWeekend,
-                    case cast (strftime('%w', CalendarDateInterval) as integer)
-                    when 0 then 0
-                    when 6 then 0
-                    else 1 end IsWeekday,
+                CASE cast (strftime('%w', CalendarDateInterval) as integer)
+                    WHEN 0 THEN 'Sunday'
+                    WHEN 1 THEN 'Monday'
+                    WHEN 2 THEN 'Tuesday'
+                    WHEN 3 THEN 'Wednesday'
+                    WHEN 4 THEN 'Thursday'
+                    WHEN 5 THEN 'Friday'
+                    WHEN 6 THEN 'Saturday' END DayOfWeek,
+                substr('SunMonTueWedThuFriSat', 1 + 3*strftime('%w', CalendarDateInterval), 3) DayOfWeekAbbr,
+                strftime('%d',CalendarDateInterval)	DayOfMonth,
+                CASE cast (strftime('%w', CalendarDateInterval) as integer)
+                    WHEN 0 THEN 1
+                    WHEN 6 THEN 1
+                    ELSE 0 END IsWeekend,
+                CASE cast (strftime('%w', CalendarDateInterval) as integer)
+                    WHEN 0 THEN 0
+                    WHEN 6 THEN 0
+                    ELSE 1 END IsWeekday,
                 strftime('%m',CalendarDateInterval)	MonthNumber,
-                case strftime('%m', date(CalendarDateInterval)) 
-                    when '01' then 'January' 
-                    when '02' then 'Febuary' 
-                    when '03' then 'March' 
-                    when '04' then 'April' 
-                    when '05' then 'May' 
-                    when '06' then 'June' 
-                    when '07' then 'July' 
-                    when '08' then 'August' 
-                    when '09' then 'September' 
-                    when '10' then 'October' 
-                    when '11' then 'November' 
-                    when '12' then 'December' else '' end MonthName,
-                case strftime('%m', date(CalendarDateInterval)) 
-                    when '01' then 'Jan' 
-                    when '02' then 'Feb' 
-                    when '03' then 'Mar' 
-                    when '04' then 'Apr' 
-                    when '05' then 'May' 
-                    when '06' then 'Jun' 
-                    when '07' then 'Jul' 
-                    when '08' then 'Aug' 
-                    when '09' then 'Sep' 
-                    when '10' then 'Oct' 
-                    when '11' then 'Nov' 
-                    when '12' then 'Dec' else '' end MonthAbbr,
+                CASE strftime('%m', date(CalendarDateInterval)) 
+                    WHEN '01' THEN 'January' 
+                    WHEN '02' THEN 'Febuary' 
+                    WHEN '03' THEN 'March' 
+                    WHEN '04' THEN 'April' 
+                    WHEN '05' THEN 'May' 
+                    WHEN '06' THEN 'June' 
+                    WHEN '07' THEN 'July' 
+                    WHEN '08' THEN 'August' 
+                    WHEN '09' THEN 'September' 
+                    WHEN '10' THEN 'October' 
+                    WHEN '11' THEN 'November' 
+                    WHEN '12' THEN 'December' ELSE '' END MonthName,
+                CASE strftime('%m', date(CalendarDateInterval)) 
+                    WHEN '01' THEN 'Jan' 
+                    WHEN '02' THEN 'Feb' 
+                    WHEN '03' THEN 'Mar' 
+                    WHEN '04' THEN 'Apr' 
+                    WHEN '05' THEN 'May' 
+                    WHEN '06' THEN 'Jun' 
+                    WHEN '07' THEN 'Jul' 
+                    WHEN '08' THEN 'Aug' 
+                    WHEN '09' THEN 'Sep' 
+                    WHEN '10' THEN 'Oct' 
+                    WHEN '11' THEN 'Nov' 
+                    WHEN '12' THEN 'Dec' ELSE '' END MonthAbbr,
                 strftime('%Y',CalendarDateInterval)	YearNumber
             FROM rDateDimensionMinute;
         """
