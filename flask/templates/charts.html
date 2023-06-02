@@ -11,16 +11,26 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Charts</title>
+    <title>My Reports - MoneyTracker</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Script for submitting form-->
+    <script>
+        $(document).ready(function() {
+          $('#saveBtn').click(function() {
+            $('#myForm').submit(); // Trigger form submission
+          });
+        });
+    </script>
+
 
 </head>
 
@@ -364,6 +374,65 @@
                         The charts below have been customized - for further customization options, please visit the <a
                             target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
                             documentation</a>.</p>
+                    
+                    <!-- POPUP TEST-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Open Form
+                      </button>
+                      
+                      <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Enter Details</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                      
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                              <form action="/submit-form" id="myForm" method="POST">
+                                <div class="form-group">
+                                  <label for="amount">Amount</label>
+                                  <input type="text" class="form-control" id="amount" name="amount">
+                                </div>
+                                <div class="btn-group btn-group-toggle btn-group-justified" style="margin:0% 10% 5% 10%; width:80%;" data-toggle="buttons">
+                                    <label class="btn" style="background-color: rgb(78, 78, 222); color: white;">
+                                      <input type="radio" name="options" id="option1" autocomplete="off"> Investment
+                                    </label>
+                                    <label class="btn" style="background-color: rgb(42, 207, 42); color: white;">
+                                      <input type="radio" name="options" id="option3" autocomplete="off"> Income
+                                    </label>
+                                    <label class="btn" style="background-color: rgb(187, 11, 11); color: white;">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> Expense
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="description">Description</label>
+                                  <input type="text" class="form-control" id="description" name="description">
+                                </div>
+                                <div class="form-group">
+                                  <label for="date">Date</label>
+                                  <input type="date" class="form-control" id="date" name="date">
+                                </div>
+                              </form>
+                            </div>
+
+                            <div>
+                                <input type="number" id="amountInput" value="0">
+                            </div>
+                              
+                            
+                      
+                            
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveBtn">Save</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                     <!-- Content Row -->
                     <div class="row">
