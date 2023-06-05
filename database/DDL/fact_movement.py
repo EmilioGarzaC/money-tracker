@@ -23,23 +23,27 @@ class factMovement:
                 DateId INTEGER NOT NULL,
                 TransactionTypeId INTEGER NOT NULL,
                 AccountId INTEGER NOT NULL,
-                CategoryId INTEGER NOT NULL,
+                MoneyGroupId INTEGER NOT NULL,
                 
                 FOREIGN KEY (DateId) REFERENCES DimDate (Id),
                 FOREIGN KEY (TransactionTypeId) REFERENCES DimTransactionType (id),
                 FOREIGN KEY (AccountId) REFERENCES DimAccount (id),
-                FOREIGN KEY (CategoryId) REFERENCES DimCategory (id)
+                FOREIGN KEY (MoneyGroupId) REFERENCES DimMoneyGroup (id)
             );
         """
         self.runStatement(createStatement)
         
         
-    def insertTestData(self):
-        insertStatement = """
+    def insertMovement(self):
+        insertStatement = f"""
             INSERT INTO FactMovements (
                 Id,
                 Amount,
-                DateId
+                Description,
+                DateId,
+                TransactionTypeId,
+                AccountId,
+                MoneyGroupId
             ) VALUES (
                 1,
                 500,

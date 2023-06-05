@@ -15,7 +15,7 @@ class dimDate:
         
     def createTable(self):
         createStatement = """
-            CREATE TABLE DimDate AS
+            CREATE TABLE IF NOT EXISTS DimDate AS
             -- Initiate the recursive loop
             WITH RECURSIVE
             -- Define a CTE to hold the recursive output

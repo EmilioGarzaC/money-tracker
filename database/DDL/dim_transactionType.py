@@ -17,10 +17,17 @@ class dimTransactionType:
         createStatement = """
             CREATE TABLE IF NOT EXISTS DimTransactionType  (
                 Id INTEGER PRIMARY KEY,
-                Amount INTEGER NOT NULL,
-                DateId TEXT NOT NULL,
-                CategoryId INT NOT NULL,
-                TransactionTypeId INT NOT NULL
+                Name VARCHAR(50)
             );
         """
         self.runStatement(createStatement)
+    
+    def populateTable(self):
+        transactionTypeNames = ['Investment', 'Income', 'Expense']
+        for transactionTypeName in transactionTypeNames:
+            insertStatement = f"""
+                INSERT INTO DimTransactionType (Name) VALUES ({transactionTypeName})
+            """
+            self.runStatement(insertStatement)
+
+    

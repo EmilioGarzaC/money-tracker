@@ -17,10 +17,22 @@ class dimAccountType:
         createStatement = """
             CREATE TABLE IF NOT EXISTS DimAccountType  (
                 Id INTEGER PRIMARY KEY,
-                Amount INTEGER NOT NULL,
-                DateId TEXT NOT NULL,
-                CategoryId INT NOT NULL,
-                TransactionTypeId INT NOT NULL
+                Name VARCHAR(50) NOT NULL
             );
         """
         self.runStatement(createStatement)
+        
+        
+    def insert(self, accountTypeName):
+        insertStatement = f"""
+            INSERT INTO DimAccountType (Name) VALUES ('{accountTypeName}');
+        """
+        self.runStatement(insertStatement)
+        
+        
+    def getAll(self):
+        selectStatement = """
+            SELECT * FROM DimAccountType;
+        """
+        self.runStatement(selectStatement)
+        return self.cur.fetchall()
