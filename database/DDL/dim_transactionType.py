@@ -22,12 +22,17 @@ class dimTransactionType:
         """
         self.runStatement(createStatement)
     
-    def populateTable(self):
-        transactionTypeNames = ['Investment', 'Income', 'Expense']
-        for transactionTypeName in transactionTypeNames:
-            insertStatement = f"""
-                INSERT INTO DimTransactionType (Name) VALUES ({transactionTypeName})
-            """
-            self.runStatement(insertStatement)
-
     
+    def insert(self, transactionTypeName):
+        insertStatement = f"""
+            INSERT INTO DimTransactionType (Name) VALUES ('{transactionTypeName}')
+        """
+        self.runStatement(insertStatement)
+            
+            
+    def getAll(self):
+        selectStatement = """
+            SELECT * FROM DimMoneyGroup;
+        """
+        self.runStatement(selectStatement)
+        return self.cur.fetchall()

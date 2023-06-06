@@ -31,6 +31,42 @@
         });
     </script>
 
+    <style>
+        #destinationAccountField {
+            opacity: 0;
+            transition: opacity 300ms ease-in;
+          }
+          
+        #destinationAccountField.fade-in {
+            opacity: 1;
+        }
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var transferRadio = document.getElementById("option4");
+            var destinationAccountField = document.getElementById("destinationAccountDropdownDiv");
+
+            // Function to handle radio button change event
+            function handleRadioChange() {
+            if (transferRadio.checked) {
+                destinationAccountField.style.display = "block";
+            } else {
+                destinationAccountField.style.display = "none";
+            }
+            }
+
+            // Trigger the function on page load
+            handleRadioChange();
+
+            // Add event listener to each radio button
+            var radioButtons = document.getElementsByName("transactionType");
+            for (var i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].addEventListener("change", handleRadioChange);
+            }
+        });
+    </script>
+
 
 </head>
 
@@ -403,15 +439,18 @@
                                     </div>
                                   </div>
                                  
-                                <div class="btn-group btn-group-toggle btn-group-justified" style="margin:0% 10% 5% 10%; width:80%;" data-toggle="buttons">
+                                <div class="btn-group btn-group-toggle btn-group-justified" style="margin:0% 5% 5% 5%; width:90%;" data-toggle="buttons">
                                     <label class="btn" style="background-color: rgb(78, 78, 222); color: white;">
-                                      <input type="radio" name="movementType" value="Investment" id="option1" autocomplete="off"> Investment
+                                        <input type="radio" name="transactionType" value="1" id="option1" autocomplete="off"> Investment
                                     </label>
                                     <label class="btn" style="background-color: rgb(42, 207, 42); color: white;">
-                                      <input type="radio" name="movementType" value="Income" id="option3" autocomplete="off"> Income
+                                        <input type="radio" name="transactionType" value="2" id="option2" autocomplete="off"> Income
                                     </label>
                                     <label class="btn" style="background-color: rgb(187, 11, 11); color: white;">
-                                        <input type="radio" name="movementType" value="Expense" id="option2" autocomplete="off"> Expense
+                                        <input type="radio" name="transactionType" value="3" id="option3" autocomplete="off"> Expense
+                                    </label>
+                                    <label class="btn" style="background-color: rgb(161, 153, 153); color: white;">
+                                        <input type="radio" name="transactionType" value="4" id="option4" autocomplete="off"> Transfer
                                     </label>
                                 </div>
 
@@ -428,6 +467,16 @@
                                 <div class="form-group">
                                     <label for="accountDropdown">Account</label>
                                     <select class="form-control" id="accountDropdown" name="accountDropdown">
+                                        <option value="" disabled selected style="display:none;">Choose an account</option>
+                                        {% for account in accounts %}
+                                        <option value="{{ account[2] }}">{{ account[0] + ' - $' + account[1]|string }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div id="destinationAccountDropdownDiv" class="form-group" style="display: none;">
+                                    <label for="destinationAccountDropdown">Destination account</label>
+                                    <select class="form-control" id="destinationAccountDropdown" name="destinationAccountDropdown">
                                         <option value="" disabled selected style="display:none;">Choose an account</option>
                                         {% for account in accounts %}
                                         <option value="{{ account[2] }}">{{ account[0] + ' - $' + account[1]|string }}</option>

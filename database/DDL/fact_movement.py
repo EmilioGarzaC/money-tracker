@@ -17,12 +17,12 @@ class factMovement:
             CREATE TABLE IF NOT EXISTS FactMovements (
                 Id INTEGER PRIMARY KEY,
                 Amount INTEGER NOT NULL,
-                Description TEXT,
+                Description TEXT NULL,
                 
                 -- Foreign keys
                 DateId INTEGER NOT NULL,
                 TransactionTypeId INTEGER NOT NULL,
-                AccountId INTEGER NOT NULL,
+                AccountId INTEGER NULL,
                 MoneyGroupId INTEGER NOT NULL,
                 
                 FOREIGN KEY (DateId) REFERENCES DimDate (Id),
@@ -34,10 +34,17 @@ class factMovement:
         self.runStatement(createStatement)
         
         
-    def insertMovement(self):
+    def insert(
+        self,  
+        amount: int, 
+        description: str, 
+        dateId: int, 
+        transactionTypeId: int, 
+        accountId: int, 
+        moneyGroupId: int
+    ):
         insertStatement = f"""
             INSERT INTO FactMovements (
-                Id,
                 Amount,
                 Description,
                 DateId,
@@ -45,12 +52,23 @@ class factMovement:
                 AccountId,
                 MoneyGroupId
             ) VALUES (
-                1,
-                500,
-                '05292023'
-            ) ;
+                {amount},
+                '{description}',
+                {dateId},
+                {transactionTypeId},
+                {accountId},
+                {moneyGroupId}
+            );
         """
         self.runStatement(insertStatement)
+        
+        
+    def getAll(self):
+        selectStatement = """
+            SELECT * FROM FactMovements;
+        """
+        self.runStatement(selectStatement)
+        return self.cur.fetchall()
         
 
 

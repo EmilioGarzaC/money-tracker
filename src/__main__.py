@@ -16,27 +16,30 @@ if __name__ == '__main__':
     # Highlight selected button
     
     print('hello')
-    # Fact Movement - Setup
-    factMovement = factMovement()
-    factMovement.createTable()
+    
     
     # Dim Date - Setup
     dimDate = dimDate()
     dimDate.createTable()
     
+    
     # Dim Money Group - Setup
     dimMoneyGroup = dimMoneyGroup()
     dimMoneyGroup.createTable()
+    
     moneyGroups = ['Car business', 'Tacos Zara', 'Garcan', 'Hersheys', 'Tech', 'Create money group']
     for moneyGroup in moneyGroups:
-        dimMoneyGroup.insert(moneyGroupName=moneyGroup)
+        dimMoneyGroup.insert(moneyGroup)
+    
     
     # Dim Account Type - Setup
     dimAccountType = dimAccountType()
     dimAccountType.createTable()
+    
     accountTypes = ['Credit', 'Debit', 'Investment', 'Payroll']
     for accountType in accountTypes:
-        dimAccountType.insert(accountTypeName=accountType)
+        dimAccountType.insert(accountType)
+    
     
     # Dim Account - Setup
     dimAccount = dimAccount()
@@ -53,4 +56,46 @@ if __name__ == '__main__':
             accountTypeId=account[2]
         )
     
+    
+    # Dim Transaction Type - Setup
+    dimTransactionType = dimTransactionType()
+    dimTransactionType.createTable()
+    
+    transactionTypeNames = ['Investment', 'Income', 'Expense', 'Transfer']
+    for transactionTypeName in transactionTypeNames:
+        dimTransactionType.insert(transactionTypeName)
+    
+
+    # Fact Movement - Setup
+    factMovement = factMovement()
+    factMovement.createTable()
+    
+    movements = [
+        {
+            'amount': 35500, 
+            'description': 'Pago de nomina',
+            'dateId': 20230530,
+            'transactionTypeId': 2, 
+            'accountId': 2, 
+            'moneyGroupId': 5,
+         },
+        {
+            'amount': 230000, 
+            'description': 'Carro - Ford F150',
+            'dateId': 20230413,
+            'transactionTypeId': 1, 
+            'accountId': 3, 
+            'moneyGroupId': 1,
+         },
+        {
+            'amount': 2000, 
+            'description': 'Renta',
+            'dateId': 20230630,
+            'transactionTypeId': 3, 
+            'accountId': 1, 
+            'moneyGroupId': 2,
+         },
+    ]
+    for movement in movements:
+        factMovement.insert(**movement)
         

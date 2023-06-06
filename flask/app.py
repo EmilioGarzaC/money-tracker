@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from database.DDL.dim_moneyGroup import dimMoneyGroup
 from database.DDL.dim_account import dimAccount
+from database.DDL.fact_movement import factMovement
 
 app = Flask(__name__)
 
@@ -19,13 +20,25 @@ def hello():
 
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
-    amount = request.form.get('amount')
-    movementType = request.form.get('movementType')
-    moneyGroupDropdown = int(request.form.get('moneyGroupDropdown'))
-    account = int(request.form.get('accountDropdown'))
-    description = request.form.get('description')
-    date = request.form.get('date')
+    # Get form field values
+    
+    requestData = {
+        'amount': int(request.form.get('amount')),
+        'description': request.form.get('description'),
+        'dateId': int(request.form.get('date').replace('-', '')),
+        'transactionTypeId': int(request.form.get('transactionType')),
+        'accountId': int(request.form.get('accountDropdown')),
+        'moneyGroupId': int(request.form.get('moneyGroupDropdown')),
+    }
+    
+    
+    
+    # Insert record into fact
+    factMovementController = factMovement()
+    factMovementController.insert(**requestData)
+    
+    return requestData
     
     
 
-    return [amount, movementType, moneyGroupDropdown, account, description, date]
+    #  return [amount, movementType, moneyGroupDropdown, account, description, date]
