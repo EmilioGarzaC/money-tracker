@@ -27,8 +27,8 @@ jobs:
           python -m venv venv
           source venv/bin/activate
       
-      #- name: Install dependencies
-      #  run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'moneytracker-emilio'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_408CF1B89DB64E3897899431E3742D23 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5EA39597D89B458A9616AA19C648B446 }}
