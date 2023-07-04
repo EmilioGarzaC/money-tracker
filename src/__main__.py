@@ -27,7 +27,7 @@ if __name__ == '__main__':
     dimMoneyGroup = dimMoneyGroup()
     dimMoneyGroup.createTable()
     
-    moneyGroups = ['Car business', 'Tacos Zara', 'Garcan', 'Hersheys', 'Tech', 'Create money group']
+    moneyGroups = ['Hersheys']#['Car business', 'Tacos Zara', 'Garcan', 'Hersheys', 'Tech', 'Create money group']
     for moneyGroup in moneyGroups:
         dimMoneyGroup.insert(moneyGroup)
     
@@ -45,9 +45,9 @@ if __name__ == '__main__':
     dimAccount = dimAccount()
     dimAccount.createTable()
     accounts = [
-        ['Banregio Debito', 1800, 1],
-        ['HSBC Premier Nomina', 55000, 4],
-        ['Banamex Nomina Ejecutiva', 35000, 4]
+        ['Banregio Debito', 21000, 1],
+        ['HSBC Premier Nomina', 115000, 4],
+        ['Banamex Nomina Ejecutiva', 45000, 4]
     ]
     for account in accounts:
         dimAccount.insert(
@@ -78,23 +78,31 @@ if __name__ == '__main__':
             'transactionTypeId': 2, 
             'accountId': 2, 
             'moneyGroupId': 5,
-         },
+        },
+        {
+            'amount': 35500, 
+            'description': 'Pago de nomina',
+            'dateId': 20230615,
+            'transactionTypeId': 2, 
+            'accountId': 2, 
+            'moneyGroupId': 5,
+        },
         {
             'amount': 230000, 
-            'description': 'Carro - Ford F150',
+            'description': 'Carro - F150',
             'dateId': 20230413,
             'transactionTypeId': 1, 
             'accountId': 3, 
             'moneyGroupId': 1,
-         },
+        },
         {
             'amount': 2000, 
-            'description': 'Renta',
+            'description': 'Electricidad',
             'dateId': 20230630,
             'transactionTypeId': 3, 
             'accountId': 1, 
             'moneyGroupId': 2,
-         },
+        },
     ]
     for movement in movements:
         factMovement.insert(**movement)
