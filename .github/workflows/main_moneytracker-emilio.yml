@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'moneytracker-emilio'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5EA39597D89B458A9616AA19C648B446 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_578FB6D6ED924715BD1BBA946A976415 }}
